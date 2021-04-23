@@ -18,3 +18,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - NextJS
 - SASS
 - Date fns
+- Axios
+
+## Used concepts
+- Functions
+- SSG = Static Side Generation

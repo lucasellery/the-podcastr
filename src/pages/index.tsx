@@ -64,3 +64,4 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 // embuscadoproximonivel
+//30:28
