@@ -5,10 +5,12 @@ import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { convertDurationToTimeString } from '../utils/convertDurationToTimeString';
 
+import styles from './home.module.scss';
+
 type Episode = {
   id: string;
   title: string;
-  memebers: string;
+  members: string;
   publishedAt: string;
   thumbnail: string;
   description: string;
@@ -19,15 +21,43 @@ type Episode = {
 }
 
 type HomeProps = {
-  episodes: Episode[];
-}
+  latestEpisodes: Episode[];
+  allEpisodes: Episode[];
+} 
 
-export default function Home(props: HomeProps ) {
+export default function Home({ latestEpisodes, allEpisodes }: HomeProps ) {
   return (
-    <>
-      <h1>index</h1>
-      <p>{JSON.stringify(props.episodes)}</p>
-    </>
+    <div className={styles.homepage}>
+      <section className={styles.latestEpisodes}>
+        <h2>Últimos lançamentos</h2>
+
+        <ul>
+          {latestEpisodes.map(episode => {
+            return (
+              <li key={episode.id}>
+                <img src={episode.thumbnail} alt={episode.title}/>
+
+                <div className={styles.episodeDetails}>
+                  <a href="">{episode.title}</a>
+                  <p>{episode.members}</p>
+                  <span>{episode.publishedAt}</span>
+                  <span>{episode.durationAsString}</span>
+                </div>
+                
+                <button type="button">
+                  <img src="/play-green.svg" alt="Tocar episódio"/>
+                </button>
+              </li>
+            )
+          })}
+        </ul>
+
+      </section>
+
+      <section className={styles.allEpisodes}>
+
+      </section>
+    </div>
   )
 }
 
@@ -55,13 +85,14 @@ export const getStaticProps: GetStaticProps = async () => {
       };
     })
 
+    const latestEpisodes = episodes.slice(0, 2);
+    const allEpisodes = episodes.slice(2, episodes.lenght);
+
   return {
     props: {
-      episodes: episodes,
+      latestEpisodes,
+      allEpisodes,
     },
     revalidate: 60 * 60 * 8,
   }
 }
-
-// embuscadoproximonivel
-//30:28
