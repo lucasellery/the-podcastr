@@ -24,3 +24,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Functions
 - SSG = Static Side Generation
 - Image component
+- getStaticPaths
+  * NextJS will generate the static page at build moment
+  * We can pass params -> slug to generate one episode statically
