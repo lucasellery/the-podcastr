@@ -1,5 +1,5 @@
-import { useContext, useEffect, useRef } from 'react';
-import { PlayerContext } from '../../contexts/PlayerContext';
+import { useEffect, useRef } from 'react';
+import { usePlayer } from '../../contexts/PlayerContext';
 import Image from 'next/image';
 import Slider from 'rc-slider';
 
@@ -15,7 +15,11 @@ export function Player() {
     isPlaying,
     togglePlay,
     setPlayingState,
-  } = useContext(PlayerContext);
+    playNext,
+    playPrevius,
+    hasNext,
+    hasPrevius
+  } = usePlayer();
 
   useEffect(() => {
     if (!audioRef.current) {
@@ -87,7 +91,7 @@ export function Player() {
             <img src="/shuffle.svg" alt="Embaralhar " />
           </button>
 
-          <button type="button" disabled={!episode}>
+          <button type="button" disabled={!episode ||!hasPrevius} onClick={playPrevius}>
             <img src="/play-previous.svg" alt="Tocar anterior " />
           </button>
 
@@ -104,7 +108,7 @@ export function Player() {
             )}
           </button>
 
-          <button type="button" disabled={!episode}>
+          <button type="button" disabled={!episode || !hasNext} onClick={playNext}>
             <img src="/play-next.svg" alt="Tocar próxima " />
           </button>
 
@@ -117,4 +121,4 @@ export function Player() {
   );
 }
 
-// episodio 4 <-> 43min
+// episodio 5 <-> 32min
